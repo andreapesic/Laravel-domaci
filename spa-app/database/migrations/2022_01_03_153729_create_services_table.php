@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ChangePhoneNumberConstraintInProvidersTable extends Migration
+class CreateServicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class ChangePhoneNumberConstraintInProvidersTable extends Migration
      */
     public function up()
     {
-        Schema::table('providers', function (Blueprint $table) {
-            $table->string('phone_number')->unique()->change();
+        Schema::create('services', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
         });
     }
 
@@ -25,8 +26,6 @@ class ChangePhoneNumberConstraintInProvidersTable extends Migration
      */
     public function down()
     {
-        Schema::table('providers', function (Blueprint $table) {
-            $table->dropUnique('providers_phone_number_unique');
-        });
+        Schema::dropIfExists('services');
     }
 }
