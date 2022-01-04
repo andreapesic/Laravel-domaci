@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Resources\ServiceResource;
 use App\Http\Resources\ServiceCollection;
+use Illuminate\Support\Facades\Validator;
 
 class ServiceController extends Controller
 {
@@ -40,7 +41,18 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:150|unique:services',
+        ]);
+
+        if ($validator->fails())
+            return response()->json($validator->errors());
+
+        $service = Service::create([
+            'name' => $request->name,
+        ]);
+
+        return response()->json(['Service is created successfully.', new ServiceResource($service)]);
     }
 
     /**
@@ -74,7 +86,18 @@ class ServiceController extends Controller
      */
     public function update(Request $request, Service $service)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:150|unique:services,name,' .$service->id,
+        ]);
+
+        if ($validator->fails())
+            return response()->json($validator->errors());
+
+        $service->name = $request->name;
+    
+        $service->save();
+
+        return response()->json(['Service is updated successfully.', new ServiceResource($service)]);
     }
 
     /**

@@ -17,4 +17,8 @@ class Service extends Model
     public function appointmentrating() {
         return $this->hasMany(AppointmentRating::class);
     }
+
+    protected $fillable = [
+        'name',
+    ];
 }
