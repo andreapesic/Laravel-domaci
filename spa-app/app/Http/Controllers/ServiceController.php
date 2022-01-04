@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AppointmentRating;
+use App\Models\Provider;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use App\Http\Resources\ServiceResource;
+use App\Http\Resources\ServiceCollection;
 
 class ServiceController extends Controller
 {
@@ -14,7 +18,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
+        return new ServiceCollection(Service::all());
     }
 
     /**
@@ -46,7 +50,7 @@ class ServiceController extends Controller
      */
     public function show(Service $service)
     {
-        //
+        return new ServiceResource($service);
     }
 
     /**

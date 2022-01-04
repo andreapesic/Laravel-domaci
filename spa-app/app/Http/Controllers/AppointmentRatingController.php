@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\AppointmentRating;
+use App\Models\Provider;
+use App\Models\Service;
 use Illuminate\Http\Request;
+use App\Http\Resources\AppointmentRatingResource;
+use App\Http\Resources\AppointmentRatingCollection;
 
 class AppointmentRatingController extends Controller
 {
@@ -14,7 +18,7 @@ class AppointmentRatingController extends Controller
      */
     public function index()
     {
-        //
+        return new AppointmentRatingCollection(AppointmentRating::all());
     }
 
     /**
@@ -41,12 +45,12 @@ class AppointmentRatingController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\AppointmentRating  $appointmentRating
+     * @param  \App\Models\AppointmentRating  $apprat
      * @return \Illuminate\Http\Response
      */
-    public function show(AppointmentRating $appointmentRating)
+    public function show(AppointmentRating $apprat)
     {
-        //
+        return new AppointmentRatingResource($apprat);
     }
 
     /**

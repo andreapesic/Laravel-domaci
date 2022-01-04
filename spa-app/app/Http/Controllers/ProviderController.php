@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AppointmentRating;
 use App\Models\Provider;
+use App\Models\Service;
 use Illuminate\Http\Request;
+use App\Http\Resources\ProviderResource;
+use App\Http\Resources\ProviderCollection;
+
 
 class ProviderController extends Controller
 {
@@ -14,7 +19,9 @@ class ProviderController extends Controller
      */
     public function index()
     {
-        //
+        $providers = Provider::all();
+        return new ProviderCollection($providers);
+
     }
 
     /**
@@ -46,7 +53,7 @@ class ProviderController extends Controller
      */
     public function show(Provider $provider)
     {
-        //
+        return new ProviderResource($provider);
     }
 
     /**
