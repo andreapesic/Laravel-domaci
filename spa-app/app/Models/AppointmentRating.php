@@ -28,4 +28,12 @@ class AppointmentRating extends Model
         return $this->belongsTo(Provider::class, 'provider');
     }
 
+    protected $fillable = [
+        'date_and_time',
+        'service',
+        'provider',
+        'user',
+        'note',
+        'rating'
+    ];
 }

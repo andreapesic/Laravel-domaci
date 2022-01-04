@@ -17,4 +17,11 @@ class Provider extends Model
     public function appointmentrating() {
         return $this->hasMany(AppointmentRating::class);
     }
+
+    protected $fillable = [
+        'name',
+        'email',
+        'phone_number',
+        'years_of_experience'
+    ];
 }
