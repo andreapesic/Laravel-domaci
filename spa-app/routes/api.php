@@ -6,6 +6,9 @@ use App\Http\Controllers\AppointmentRatingController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserAppointmentRatingController;
+use App\Http\Controllers\ProviderAppointmentRatingController;
+use App\Http\Controllers\ServiceAppointmentRatingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +32,9 @@ Route::resource('providers', ProviderController::class);
 Route::resource('apprat', AppointmentRatingController::class);
 
 Route::resource('users', UserController::class)->only(['index', 'show']);
+
+Route::get('/users/{id}/apprat', [UserAppointmentRatingController::class, 'index']);
+
+Route::get('/providers/{id}/apprat', [ProviderAppointmentRatingController::class, 'index']);
+
+Route::get('/services/{id}/apprat', [ServiceAppointmentRatingController::class, 'index']);

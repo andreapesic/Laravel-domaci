@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AppointmentRating;
 use App\Models\Provider;
 use App\Models\Service;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Resources\AppointmentRatingResource;
 use App\Http\Resources\AppointmentRatingCollection;
