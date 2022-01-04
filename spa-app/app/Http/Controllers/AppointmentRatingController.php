@@ -125,8 +125,10 @@ class AppointmentRatingController extends Controller
      * @param  \App\Models\AppointmentRating  $appointmentRating
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AppointmentRating $appointmentRating)
+    public function destroy(AppointmentRating $apprat)
     {
-        //
+        $apprat->delete();
+
+        return response()->json('Appointment rating is deleted successfully.');
     }
 }

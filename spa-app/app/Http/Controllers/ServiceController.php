@@ -108,6 +108,8 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
-        //
+        $service->delete();
+
+        return response()->json('Service is deleted successfully.');
     }
 }

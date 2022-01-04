@@ -123,6 +123,8 @@ class ProviderController extends Controller
      */
     public function destroy(Provider $provider)
     {
-        //
+        $provider->delete();
+
+        return response()->json('Provider is deleted successfully.');
     }
 }
