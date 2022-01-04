@@ -7,11 +7,10 @@ use App\Models\Provider;
 use App\Models\Service;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Resources\ProviderResource;
-use App\Http\Resources\ProviderCollection;
+use App\Http\Resources\UserResource;
+use App\Http\Resources\UserCollection;
 
-
-class ProviderController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,9 +19,7 @@ class ProviderController extends Controller
      */
     public function index()
     {
-        $providers = Provider::all();
-        return new ProviderCollection($providers);
-
+        return new UserCollection(User::all());
     }
 
     /**
@@ -49,21 +46,21 @@ class ProviderController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Provider  $provider
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(Provider $provider)
+    public function show(User $user)
     {
-        return new ProviderResource($provider);
+        return new UserResource($user);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Provider  $provider
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(Provider $provider)
+    public function edit(User $user)
     {
         //
     }
@@ -72,10 +69,10 @@ class ProviderController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Provider  $provider
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Provider $provider)
+    public function update(Request $request, User $user)
     {
         //
     }
@@ -83,10 +80,10 @@ class ProviderController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Provider  $provider
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Provider $provider)
+    public function destroy(User $user)
     {
         //
     }
