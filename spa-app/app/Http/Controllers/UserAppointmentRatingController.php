@@ -16,4 +16,15 @@ class UserAppointmentRatingController extends Controller
         return new AppointmentRatingCollection($apprat);
 
     }
+
+    public function myapprat()
+    {
+        if(auth()->user()->isAdmin())
+            return response()->json('You are not allowed to have appointment ratings.');  
+        $apprat = AppointmentRating::get()->where('user', auth()->user()->id);
+        if (count($apprat) == 0)
+            return response()->json('Data not found', 404);
+        return new AppointmentRatingCollection($apprat);
+
+    }
 }
