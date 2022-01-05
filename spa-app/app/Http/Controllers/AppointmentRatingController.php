@@ -44,7 +44,6 @@ class AppointmentRatingController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'date_and_time' => 'required|date',
-            'user' => 'required|numeric|digits_between:1,5',
             'service' => 'required|numeric|digits_between:1,5',
             'rating' => 'required|numeric|lte:5|gte:1',
             'note' => 'required|string|min:20',
@@ -54,9 +53,12 @@ class AppointmentRatingController extends Controller
         if ($validator->fails())
             return response()->json($validator->errors());
 
+        if(auth()->user()->isAdmin())
+            return response()->json('You are not authorized to create new appointment ratings.'); 
+
         $apprat = AppointmentRating::create([
             'date_and_time' => $request->date_and_time,
-            'user' => $request->user,
+            'user' => auth()->user()->id,
             'service' => $request->service,
             'rating' => $request->rating,
             'note' => $request->note,
@@ -99,7 +101,6 @@ class AppointmentRatingController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'date_and_time' => 'required|date',
-            'user' => 'required|numeric|digits_between:1,5',
             'service' => 'required|numeric|digits_between:1,5',
             'rating' => 'required|numeric|lte:5|gte:1',
             'note' => 'required|string|min:20',
@@ -109,13 +110,21 @@ class AppointmentRatingController extends Controller
         if ($validator->fails())
             return response()->json($validator->errors());
 
+        if(auth()->user()->isAdmin())
+            return response()->json('You are not authorized to update appointment ratings.');    
+            
+        if(auth()->user()->id != $apprat->user)
+            return response()->json('You are not authorized to update someone elses appointment ratings.');     
+
         $apprat->date_and_time = $request->date_and_time;
-        $apprat->user = $request->user;
+        $apprat->user = auth()->user()->id;
         $apprat->service = $request->service;
         $apprat->rating = $request->rating;
         $apprat->note = $request->note;
         $apprat->provider = $request->provider;
 
+        $apprat->save();
+        
         return response()->json(['Appointment rating is updated successfully.', new AppointmentRatingResource($apprat)]);
     }
 
@@ -127,6 +136,13 @@ class AppointmentRatingController extends Controller
      */
     public function destroy(AppointmentRating $apprat)
     {
+
+        if(auth()->user()->isAdmin())
+            return response()->json('You are not authorized to delete appointment ratings.');    
+            
+        if(auth()->user()->id != $apprat->user)
+            return response()->json('You are not authorized to delete someone elses appointment ratings.');
+
         $apprat->delete();
 
         return response()->json('Appointment rating is deleted successfully.');

@@ -48,6 +48,9 @@ class ServiceController extends Controller
         if ($validator->fails())
             return response()->json($validator->errors());
 
+        if(auth()->user()->isUser())
+            return response()->json('You are not authorized to create new services.');    
+
         $service = Service::create([
             'name' => $request->name,
         ]);
@@ -93,6 +96,9 @@ class ServiceController extends Controller
         if ($validator->fails())
             return response()->json($validator->errors());
 
+        if(auth()->user()->isUser())
+            return response()->json('You are not authorized to update services.');    
+
         $service->name = $request->name;
     
         $service->save();
@@ -108,6 +114,10 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
+
+        if(auth()->user()->isUser())
+            return response()->json('You are not authorized to delete services.'); 
+
         $service->delete();
 
         return response()->json('Service is deleted successfully.');
