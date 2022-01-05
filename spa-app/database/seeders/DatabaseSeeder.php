@@ -7,6 +7,9 @@ use \App\Models\User;
 use \App\Models\Provider;
 use \App\Models\Service;
 use \App\Models\AppointmentRating;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -25,6 +28,15 @@ class DatabaseSeeder extends Seeder
 
         User::factory(5)->create();
         Provider::factory(10)->create();
+
+        $user = User::create([
+            'name' => 'Andrea',
+            'email' => 'deapesic@gmail.com',
+            'password' => Hash::make('andreaAdmin99.'),
+            'email_verified_at' => now(),
+            'remember_token' => Str::random(10),
+            'role' => 'admin'
+        ]);
 
         $service1 = Service::create([
             'name' => 'Massage'
