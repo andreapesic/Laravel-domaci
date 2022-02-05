@@ -44,10 +44,10 @@ class AppointmentRatingController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'date_and_time' => 'required|date',
-            'service' => 'required|numeric|digits_between:1,5',
+            'service' => 'required|numeric|gte:1|lte:5',
             'rating' => 'required|numeric|lte:5|gte:1',
             'note' => 'required|string|min:20',
-            'provider' => 'required|numeric|digits_between:1,10',
+            'provider' => 'required|numeric|gte:1|lte:10',
         ]);
 
         if ($validator->fails())
@@ -101,10 +101,10 @@ class AppointmentRatingController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'date_and_time' => 'required|date',
-            'service' => 'required|numeric|digits_between:1,5',
+            'service' => 'required|numeric|gte:1|lte:5',
             'rating' => 'required|numeric|lte:5|gte:1',
             'note' => 'required|string|min:20',
-            'provider' => 'required|numeric|digits_between:1,10',
+            'provider' => 'required|numeric|gte:1|lte:10',
         ]);
 
         if ($validator->fails())
