@@ -133,6 +133,10 @@ class ProviderController extends Controller
         if(auth()->user()->isUser())
             return response()->json('You are not authorized to delete providers.'); 
 
+        $apprat = AppointmentRating::get()->where('provider', $provider_id);
+        if (count($apprat) > 0)
+            return response()->json('You cannot delete providers that have appointment ratings.');
+
         $provider->delete();
 
         return response()->json('Provider is deleted successfully.');

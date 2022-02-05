@@ -118,6 +118,10 @@ class ServiceController extends Controller
         if(auth()->user()->isUser())
             return response()->json('You are not authorized to delete services.'); 
 
+        $apprat = AppointmentRating::get()->where('service', $service->id);
+        if (count($apprat) > 0)
+            return response()->json('You cannot delete services that have appointment ratings.');
+
         $service->delete();
 
         return response()->json('Service is deleted successfully.');

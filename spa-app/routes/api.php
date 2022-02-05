@@ -10,6 +10,7 @@ use App\Http\Controllers\UserAppointmentRatingController;
 use App\Http\Controllers\ProviderAppointmentRatingController;
 use App\Http\Controllers\ServiceAppointmentRatingController;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Resources\UserResource;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,8 +23,9 @@ use App\Http\Controllers\API\AuthController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+//moj profil
+Route::middleware('auth:sanctum')->get('/myprofile', function (Request $request) {
+    return new UserResource($request->user());
 });
 
 
@@ -38,7 +40,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     //user
     Route::resource('apprat', AppointmentRatingController::class)->only(['store', 'update', 'destroy']); //radi
 
-    //svi
+    //svi loginovani
     Route::post('/logout', [AuthController::class, 'logout']); //radi
     Route::get('/myapprat', [UserAppointmentRatingController::class, 'myapprat']); //radi
     Route::resource('users', UserController::class)->only(['update']); //radi

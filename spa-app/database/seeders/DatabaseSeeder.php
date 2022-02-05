@@ -38,8 +38,6 @@ class DatabaseSeeder extends Seeder
         User::factory(5)->create();
         Provider::factory(10)->create();
 
-        
-
         $service1 = Service::create([
             'name' => 'Massage'
         ]);
@@ -62,7 +60,7 @@ class DatabaseSeeder extends Seeder
         
         $appointementRating1 = AppointmentRating::create([
             'date_and_time' => now(),
-            'user' => 1,
+            'user' => 2,
             'service' => 1,
             'provider' => 1,
             'rating' => 5,
@@ -71,7 +69,7 @@ class DatabaseSeeder extends Seeder
 
         $appointementRating2 = AppointmentRating::create([
             'date_and_time' => now(),
-            'user' => 2,
+            'user' => 3,
             'service' => 1,
             'provider' => 2,
             'rating' => 5,
