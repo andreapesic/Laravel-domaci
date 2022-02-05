@@ -47,7 +47,7 @@ class AppointmentRatingController extends Controller
             'service' => 'required|numeric|digits_between:1,5',
             'rating' => 'required|numeric|lte:5|gte:1',
             'note' => 'required|string|min:20',
-            'provider' => 'required|numeric|digits_between:1,5',
+            'provider' => 'required|numeric|digits_between:1,10',
         ]);
 
         if ($validator->fails())
@@ -104,7 +104,7 @@ class AppointmentRatingController extends Controller
             'service' => 'required|numeric|digits_between:1,5',
             'rating' => 'required|numeric|lte:5|gte:1',
             'note' => 'required|string|min:20',
-            'provider' => 'required|numeric|digits_between:1,5',
+            'provider' => 'required|numeric|digits_between:1,10',
         ]);
 
         if ($validator->fails())
